@@ -13,7 +13,6 @@ WARNING:
       ensure you have proper backups before running this script.
 */
 
-
 use master;
 go
 -- Drop and recreate 'DataWarehouse' database
