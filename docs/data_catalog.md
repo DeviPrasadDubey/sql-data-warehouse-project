@@ -1,209 +1,65 @@
-Data Catalog: Gold Layer
-The Gold Layer serves as the definitive business-level data representation, meticulously structured to empower sophisticated analytical and reporting use cases. This layer comprises both dimension tables, providing contextual attributes, and fact tables, capturing key business metrics.
+# 📘 Data Catalog – Gold Layer
+
+This document contains the **data catalog** for the Gold Layer of our data warehouse. The Gold Layer is the final stage of the ETL pipeline and contains clean, structured data that's ready for analysis and reporting. It mainly includes **dimension tables** (for descriptive information) and **fact tables** (for transactional or numeric data).
+
+The **Gold Layer** represents the finalized business-ready data model. It is designed to support advanced reporting, dashboards, and analytics. This layer includes **dimension tables** that add context, and **fact tables** that store measurable business data.
+---
+
+## 🔷 1. Table: `gold.dim_customers`
+
+**Purpose:**  
+This table stores detailed customer information, including basic details and demographic info. It helps in understanding the customer base better for business analysis.
+
+| Column Name     | Data Type     | Description                                                                 |
+|------------------|---------------|-----------------------------------------------------------------------------|
+| customer_key     | INT           | A unique surrogate key for each customer row.                               |
+| customer_id      | INT           | Original ID given to each customer by the system.                           |
+| customer_number  | NVARCHAR(50)  | A code used to track or reference customers.                                |
+| first_name       | NVARCHAR(50)  | Customer’s first name.                                                      |
+| last_name        | NVARCHAR(50)  | Customer’s last name.                                                       |
+| country          | NVARCHAR(50)  | Country where the customer lives (e.g., India, Australia).                  |
+| marital_status   | NVARCHAR(50)  | Marital status like Single, Married, etc.                                   |
+| gender           | NVARCHAR(50)  | Gender of the customer (Male, Female, or Not Available).                    |
+| birthdate        | DATE          | Customer's date of birth (format: YYYY-MM-DD).                              |
+| create_date      | DATE          | Date when this record was added to the system.                              |
+
+---
+
+## 🔷 2. Table: `gold.dim_products`
+
+**Purpose:**  
+This dimension table contains full product details like name, category, price, and whether it needs maintenance. It helps in analyzing product-wise performance and categorization.
+
+| Column Name         | Data Type     | Description                                                                 |
+|----------------------|---------------|-----------------------------------------------------------------------------|
+| product_key          | INT           | Surrogate key for uniquely identifying each product.                        |
+| product_id           | INT           | System-assigned product ID.                                                 |
+| product_number       | NVARCHAR(50)  | Product code used in inventory or catalog.                                  |
+| product_name         | NVARCHAR(50)  | Full name or description of the product.                                    |
+| category_id          | NVARCHAR(50)  | ID for the main product category.                                           |
+| category             | NVARCHAR(50)  | Broad classification of product (e.g., Bikes, Accessories).                |
+| subcategory          | NVARCHAR(50)  | More specific classification (e.g., Helmets, Tires).                        |
+| maintenance_required | NVARCHAR(50)  | Shows if product needs maintenance (Yes/No).                                |
+| cost                 | INT           | Base cost of the product in currency (no decimals).                         |
+| product_line         | NVARCHAR(50)  | Series or line of the product (e.g., Road, Mountain).                       |
+| start_date           | DATE          | Date when the product became available.                                     |
+
+---
+
+## 🔷 3. Table: `gold.fact_sales`
+
+**Purpose:**  
+This fact table stores each sales transaction. It connects to both customers and products and is used for sales reporting and revenue analysis.
+
+| Column Name   | Data Type     | Description                                                                 |
+|----------------|---------------|-----------------------------------------------------------------------------|
+| order_number   | NVARCHAR(50)  | Unique ID for each sales order (e.g., SO1001).                              |
+| product_key    | INT           | Foreign key linking to `dim_products`.                                      |
+| customer_key   | INT           | Foreign key linking to `dim_customers`.                                     |
+| order_date     | DATE          | The date when the order was placed.                                         |
+| shipping_date  | DATE          | The date when the product was shipped.                                      |
+| due_date       | DATE          | The expected payment due date.                                              |
+| sales_amount   | INT           | Total value of the sale (in full currency amount).                          |
+| quantity       | INT           | Number of units sold.                                                       |
+| price          | INT           | Price per unit at time of sale.                                             |
 
-1. gold.dim_customers
-Purpose: This dimension table meticulously curates comprehensive customer details, significantly enriched with vital demographic and geographic data to provide a holistic view of your customer base.
-
-Column Name
-
-Data Type
-
-Description
-
-customer_key
-
-INT
-
-A surrogate key acting as the unique identifier for each customer record within this dimension table.
-
-customer_id
-
-INT
-
-The distinct numerical identifier assigned to every customer for internal tracking.
-
-customer_number
-
-NVARCHAR(50)
-
-An alphanumeric code for customer tracking and cross-referencing purposes.
-
-first_name
-
-NVARCHAR(50)
-
-The customer's given name, precisely as recorded in the system.
-
-last_name
-
-NVARCHAR(50)
-
-The customer's surname or family name.
-
-country
-
-NVARCHAR(50)
-
-The customer's country of residence (e.g., 'Australia').
-
-marital_status
-
-NVARCHAR(50)
-
-The current marital status of the customer (e.g., 'Married', 'Single').
-
-gender
-
-NVARCHAR(50)
-
-The specified gender of the customer (e.g., 'Male', 'Female', 'n/a').
-
-birthdate
-
-DATE
-
-The customer's date of birth, formatted as YYYY-MM-DD (e.g., 1971-10-06).
-
-create_date
-
-DATE
-
-The timestamp when this customer record was initially generated within the system.
-
-2. gold.dim_products
-Purpose: This dimension table furnishes exhaustive information regarding products and their intrinsic attributes, enabling granular analysis of your product portfolio.
-
-Column Name
-
-Data Type
-
-Description
-
-product_key
-
-INT
-
-A surrogate key serving as the unique identifier for each product entry in this dimension table.
-
-product_id
-
-INT
-
-A unique numerical identifier assigned to the product for seamless internal tracking and referencing.
-
-product_number
-
-NVARCHAR(50)
-
-A structured alphanumeric code representing the product, often instrumental for categorization or inventory management.
-
-product_name
-
-NVARCHAR(50)
-
-The comprehensive descriptive name of the product, encompassing crucial details like type, color, and size.
-
-category_id
-
-NVARCHAR(50)
-
-A unique identifier for the product's overarching category, facilitating its high-level classification.
-
-category
-
-NVARCHAR(50)
-
-The broader classification of the product (e.g., Bikes, Components) designed to logically group related items.
-
-subcategory
-
-NVARCHAR(50)
-
-A more refined classification of the product within its designated category, often indicating product type.
-
-maintenance_required
-
-NVARCHAR(50)
-
-An indicator specifying whether the product necessitates ongoing maintenance (e.g., 'Yes', 'No').
-
-cost
-
-INT
-
-The fundamental cost or base price of the product, denominated in whole monetary units.
-
-product_line
-
-NVARCHAR(50)
-
-The specific product line or series to which the product inherently belongs (e.g., Road, Mountain).
-
-start_date
-
-DATE
-
-The precise date when the product became commercially available for sale or general use.
-
-3. gold.fact_sales
-Purpose: This fact table meticulously captures and stores critical transactional sales data, serving as the cornerstone for in-depth analytical investigations and performance insights.
-
-Column Name
-
-Data Type
-
-Description
-
-order_number
-
-NVARCHAR(50)
-
-A unique alphanumeric identifier for each distinct sales order (e.g., 'SO54496').
-
-product_key
-
-INT
-
-A surrogate key that establishes the crucial link between the sales order and the gold.dim_products dimension table.
-
-customer_key
-
-INT
-
-A surrogate key that links the sales order to the gold.dim_customers dimension table.
-
-order_date
-
-DATE
-
-The date on which the sales order was formally placed.
-
-shipping_date
-
-DATE
-
-The date when the ordered goods were dispatched to the customer.
-
-due_date
-
-DATE
-
-The specified date by which payment for the order was expected.
-
-sales_amount
-
-INT
-
-The total monetary value of the sale for a particular line item, expressed in whole currency units (e.g., 25).
-
-quantity
-
-INT
-
-The numerical count of product units ordered for the specific line item (e.g., 1).
-
-price
-
-INT
-
-The unit price of the product for the line item, also represented in whole currency units (e.g., 25).
