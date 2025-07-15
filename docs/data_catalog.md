@@ -2,7 +2,6 @@
 
 This document contains the **data catalog** for the Gold Layer of our data warehouse. The Gold Layer is the final stage of the ETL pipeline and contains clean, structured data that's ready for analysis and reporting. It mainly includes **dimension tables** (for descriptive information) and **fact tables** (for transactional or numeric data).
 
-The **Gold Layer** represents the finalized business-ready data model. It is designed to support advanced reporting, dashboards, and analytics. This layer includes **dimension tables** that add context, and **fact tables** that store measurable business data.
 ---
 
 ### 1. **gold.dim_customers**
