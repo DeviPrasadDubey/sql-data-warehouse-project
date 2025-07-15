@@ -1,11 +1,11 @@
-# 📘 Data Catalog – Gold Layer
+# Data Catalog – Gold Layer
 
 This document contains the **data catalog** for the Gold Layer of our data warehouse. The Gold Layer is the final stage of the ETL pipeline and contains clean, structured data that's ready for analysis and reporting. It mainly includes **dimension tables** (for descriptive information) and **fact tables** (for transactional or numeric data).
 
 The **Gold Layer** represents the finalized business-ready data model. It is designed to support advanced reporting, dashboards, and analytics. This layer includes **dimension tables** that add context, and **fact tables** that store measurable business data.
 ---
 
-## 🔷 1. Table: `gold.dim_customers`
+### 1. **gold.dim_customers**
 
 **Purpose:**  
 This table stores detailed customer information, including basic details and demographic info. It helps in understanding the customer base better for business analysis.
@@ -25,7 +25,7 @@ This table stores detailed customer information, including basic details and dem
 
 ---
 
-## 🔷 2. Table: `gold.dim_products`
+### 2. **gold.dim_products**
 
 **Purpose:**  
 This dimension table contains full product details like name, category, price, and whether it needs maintenance. It helps in analyzing product-wise performance and categorization.
@@ -46,10 +46,11 @@ This dimension table contains full product details like name, category, price, a
 
 ---
 
-## 🔷 3. Table: `gold.fact_sales`
+### 3. **gold.fact_sales**
 
 **Purpose:**  
 This fact table stores each sales transaction. It connects to both customers and products and is used for sales reporting and revenue analysis.
+
 
 | Column Name   | Data Type     | Description                                                                 |
 |----------------|---------------|-----------------------------------------------------------------------------|
