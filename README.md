@@ -64,8 +64,10 @@ data-warehouse-project/
 📧 dubeydeviprasad763@gmail.com
 🔗 www.linkedin.com/in/devi-prasad-dubey-580892349
  
-
 ---
 
-
+## 🔗 Next Phase: Data Analytics
+This warehouse was later used for advanced SQL-based analytics and insights.  
+👉 Check out the next phase here: [SQL Data Analytics Project](https://github.com/DeviPrasadDubey/sql-data-analytics)
+---
 
