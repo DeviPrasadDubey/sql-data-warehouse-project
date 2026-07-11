@@ -8,7 +8,7 @@ This project demonstrate a comprehensive data warehousing and nalytics solution,
 
 ## Project Requirements
 
-### Building the Data Warehouse (Data Engineering)
+### Building the Data Warehouse
 
 #### Objective
 Develop a modern data warehouse using SQL Server to consolidate sales data, enabling analtical reporting and informed decision-making.
@@ -62,7 +62,7 @@ data-warehouse-project/
 ## ✨ Author  
 👤 **Devi Prasad Dubey**  
 📧 dubeydeviprasad763@gmail.com
-🔗 www.linkedin.com/in/devi-prasad-dubey-580892349
+🔗 www.linkedin.com/in/devi-prasad-dubey
  
 ---
 
